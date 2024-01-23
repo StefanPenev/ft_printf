@@ -1,28 +1,27 @@
-#include "../libft.h"
 #include "ft_printf.h"
 
 
 static int check_format(va_list args, const char format)
 {
     if (format == '%')
-		return (write(1, '%', 1));
+		return (write(1, "%", 1));
 	else if (format == 'c')
 	{
 		ft_putchar_fd(va_arg(args, int), 1);
 		return (1);
 	}
 	else if (format == 's')
-		return (prt_str(va_arg(args, char *)));
+		return (print_str(va_arg(args, char *)));
 	else if (format == 'p')
-		return (prt_ptr(va_arg(args, void *)));
-	else if (format == 'd' || spec_ltr == 'i')
-		return (prt_int(va_arg(args, int)));
+		return (print_ptr(va_arg(args, unsigned long long)));
+	else if (format == 'd' || format == 'i')
+		return (print_nbr(va_arg(args, int)));
 	else if (format == 'u')
-		return (prt_unsigned(va_arg(args, unsigned int)));
+		return (print_unsigned(va_arg(args, unsigned int)));
 	else if (format == 'x')
-		return (prt_hexa(va_arg(args, ssize_t), false));
+		return (print_hex(va_arg(args, unsigned int), format));
 	else if (format == 'X')
-		return (prt_hexa(va_arg(args, ssize_t), true));
+		return (print_hex(va_arg(args, unsigned int), format));
 	return (0);
 }
 
